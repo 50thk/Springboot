@@ -9,6 +9,6 @@ public class HelloController {
     @RequestMapping("/hello")
     @ResponseBody
     public String hello() {
-        return "Hello sbb";
+        return "Hello Spring Boot Board";
     }
 }

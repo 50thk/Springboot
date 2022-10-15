@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch HelloLombok",
+            "request": "launch",
+            "mainClass": "com.mysite.sbb.HelloLombok",
+            "projectName": "sbb"
+        },
+        {
+            "type": "java",
             "name": "Spring Boot-SbbApplication<sbb>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
