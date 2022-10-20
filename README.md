@@ -12,12 +12,22 @@
 
 3. Spring 기능
 
-    - @Controller / org.springframework.stereotype.Controller, 클래스를 컨트롤러로 지정
-    - @RequestMapping("/app") / org.springframework.web.bind.annotation.RequestMapping, 요청된 URL과의 매핑을 담당(요청 발생 시 컨트롤러를 대상으로 찾음)
-    - @ResponseBody / org.springframework.web.bind.annotation.ResponseBody, URL 요청에 대한 응답(return)
+    - annotation
+        * @Controller / org.springframework.stereotype.Controller, 클래스를 컨트롤러로 지정
+        * @RequestMapping("/app") / org.springframework.web.bind.annotation.RequestMapping, 요청된 URL과의 매핑을 담당(요청 발생 시 컨트롤러를 대상으로 찾음)
+        * @ResponseBody / org.springframework.web.bind.annotation.ResponseBody, URL 요청에 대한 응답(return)
+        * @Entity / javax.persistence.Entity, 클래스를 엔티티로 지정 / 일반적으로 엔티티에는 Setter 대신 lombok의 @Builder annotation을 통한 빌드패턴을 사용
+        * @GeneratedValue / javax.persistence.GeneratedValue, 데이터를 저장할 때 해당 속성에 값을 따로 세팅하지 않아도 1씩 자동으로 증가하여 저장된다. strategy는 고유번호를 생성하는 옵션으로 GenerationType.IDENTITY는 해당 컬럼만의 독립적인 시퀀스를 생성하여 번호를 증가시킬 때 사용한다. strategy 옵션을 생략할 경우에 @GeneratedValue 애너테이션이 지정된 컬럼들이 모두 동일한 시퀀스로 번호를 생성하기 때문에 일정한 순서의 고유번호를 가질수 없게 된다. 이러한 이유로 보통 GenerationType.IDENTITY를 많이 사용한다.
+        * @Column / javax.persistence.Column,   엔티티의 속성은 테이블의 컬럼명과 일치하는데 컬럼의 세부 설정을 위해 사용한다. length는 컬럼의 길이를 설정할때 사용하고 columnDefinition은 컬럼의 속성을 정의할 때 사용한다. columnDefinition = "TEXT"은 "내용"처럼 글자 수를 제한할 수 없는 경우에 사용한다. 엔티티의 속성은 @Column 애너테이션을 사용하지 않더라도 테이블 컬럼으로 인식한다. 테이블 컬럼으로 인식하고 싶지 않은 경우에만 @Transient 애너테이션을 사용한다.
+        * @Id / javax.persistence.Id, primary key로 지정
+        * @ManyToOne / javax.persistence.ManyToOne, N:1 관계 설정, 부모 자식 관계
+        * @OneToMany / javax.persistence.OneToMany, 1:N 관계 설정, mappedBy - 참조 엔티티의 속성명, cascade - CascadeType - 질문이 삭제될 때 답변들의 거취 유형(REMOVE 전체 삭제)
+        * 테이블의 컬럼명 / createDate 속성의 실제 테이블의 컬럼명은 create_date가 됨. createDate처럼 대소문자 형태의 카멜케이스(Camel Case) 이름은 모두 소문자로 변경되고 언더바(_)로 단어가 구분되어 실제 테이블 컬럼명이 된다.
+
     - ORM(object relational mapping) / java의 문법으로 데이터베이스 데이터 처리, 내부에서 자동으로 SQL쿼리로 변환되어 처리됨 / 'ORM을 이용하면 데이터베이스 종류에 상관 없이 일관된 코드를 유지할 수 있어서 프로그램을 유지·보수하기가 편리하다. 개발자가 달라도 통일된 쿼리를 작성할 수 있고 오류 발생률도 줄일 수 있다.'
     - JPA(Java Persistence API) / JPA를 사용하여 데이터베이스를 처리(저장, 조회), JPA는 자바 진영에서 ORM(Object-Relational Mapping)의 기술 표준으로 사용하는 인터페이스의 모음, 인터페이스이므로 구현 클래스 필요, JPA를 구현한 대표적인 실제 클래스에는 하이버네이트(Hibernate)가 있다.
     - H2 database / 주로 개발용이나 소규모 프로젝트에서 사용되는 파일 기반의 경량 데이터베이스이다. 개발시에는 H2를 사용하여 빠르게 개발하고 실제 운영시스템은 좀 더 규모있는 DB를 사용하는 것이 일반적인 개발 패턴.
+    - Entity / 데이터베이스 테이블과 매핑되는 자바 클래스, 모델, 도메인 모델이라고 부르기도 함.
     - application.properties 설정
         * spring.h2.console.enabled - H2 콘솔의 접속을 허용할지의 여부
         * spring.h2.console.path - 콘솔 접속을 위한 URL 경로
@@ -27,3 +37,4 @@
         * spring.datasource.password - 데이터베이스의 패스워드
         * spring.jpa.properties.hibernate.dialect - 데이터베이스 엔진 종류를 설정
         * spring.jpa.hibernate.ddl-auto - 엔티티를 기준으로 테이블을 생성하는 규칙을 정의, 개발 환경에서는 보통 update 모드를 사용하고 운영환경에서는 none 또는 validate 모드를 사용 / none - 엔티티가 변경되더라도 데이터베이스를 변경하지 않는다., update - 엔티티의 변경된 부분만 적용한다., validate - 변경사항이 있는지 검사만 한다., create - 스프링부트 서버가 시작될때 모두 drop하고 다시 생성한다., create-drop - create와 동일하다. 하지만 종료시에도 모두 drop 한다.
+    - 
