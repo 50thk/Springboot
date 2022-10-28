@@ -23,11 +23,19 @@
         * @ManyToOne / javax.persistence.ManyToOne, N:1 관계 설정, 부모 자식 관계
         * @OneToMany / javax.persistence.OneToMany, 1:N 관계 설정, mappedBy - 참조 엔티티의 속성명, cascade - CascadeType - 질문이 삭제될 때 답변들의 거취 유형(REMOVE 전체 삭제)
         * 테이블의 컬럼명 / createDate 속성의 실제 테이블의 컬럼명은 create_date가 됨. createDate처럼 대소문자 형태의 카멜케이스(Camel Case) 이름은 모두 소문자로 변경되고 언더바(_)로 단어가 구분되어 실제 테이블 컬럼명이 된다.
+        * @SpringBootTest / org.springframework.boot.test.context.SpringBootTest, 해당 클래스가 스프링부트 테스트 클래스임을 의미.
+        * @Autowired / org.springframework.beans.factory.annotation.Autowired, 스프링의 DI기능으로 해당 객체를 스프링이 자동으로 생성해줌. 객체를 주입하기 위해 사용하는 스프링의 애너테이션이다. 객체를 주입하는 방식에는 @Autowired 외에 Setter 또는 생성자를 사용하는 방식이 있다. 순환참조 문제와 같은 이유로 @Autowired 보다는 생성자를 통한 객체 주입방식이 권장된다. 하지만 테스트 코드의 경우에는 생성자를 통한 객체의 주입이 불가능하므로 테스트 코드 작성시에만 @Autowired를 사용
+        * @Test / 해당 메서드가 테스트 메서드임을 의미. 클래스를 JUnit으로 실행 시 @Test 애너테이션이 붙은 메서드가 실행;JUnit은 작성한 테스트코드를 실행하기 위해 사용하는 자바의 테스트 프레임워크
+        * @Transactional / org.springframework.transaction.annotation.Transactional, 메서드가 종료될 때까지 DB 세션이 유지된다.
 
+    - assertEquals(기대값, 실제값) / 테스트에서 기대값과 실제값을 비교하고 같으면 테스트 통과, 다르면 테스트 실패로 처리.
+    - findAll, findById, findBySubject,
+    - Optional / null값을 유연하게 처리하기 위해 사용하는 클래스, isPresent로 null이 아닌지 맞는지 true, false를 리턴받아 확인
     - ORM(object relational mapping) / java의 문법으로 데이터베이스 데이터 처리, 내부에서 자동으로 SQL쿼리로 변환되어 처리됨 / 'ORM을 이용하면 데이터베이스 종류에 상관 없이 일관된 코드를 유지할 수 있어서 프로그램을 유지·보수하기가 편리하다. 개발자가 달라도 통일된 쿼리를 작성할 수 있고 오류 발생률도 줄일 수 있다.'
     - JPA(Java Persistence API) / JPA를 사용하여 데이터베이스를 처리(저장, 조회), JPA는 자바 진영에서 ORM(Object-Relational Mapping)의 기술 표준으로 사용하는 인터페이스의 모음, 인터페이스이므로 구현 클래스 필요, JPA를 구현한 대표적인 실제 클래스에는 하이버네이트(Hibernate)가 있다.
     - H2 database / 주로 개발용이나 소규모 프로젝트에서 사용되는 파일 기반의 경량 데이터베이스이다. 개발시에는 H2를 사용하여 빠르게 개발하고 실제 운영시스템은 좀 더 규모있는 DB를 사용하는 것이 일반적인 개발 패턴.
     - Entity / 데이터베이스 테이블과 매핑되는 자바 클래스, 모델, 도메인 모델이라고 부르기도 함.
+    - Repository / 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들(예: findAll, save 등)을 사용하기 위한 인터페이스이다. 데이터 처리를 위해서는 테이블에 어떤 값을 넣거나 값을 조회하는 등의 CRUD(Create, Read, Update, Delete)가 필요하다. 이 때 이러한 CRUD를 어떻게 처리할지 정의하는 계층
     - application.properties 설정
         * spring.h2.console.enabled - H2 콘솔의 접속을 허용할지의 여부
         * spring.h2.console.path - 콘솔 접속을 위한 URL 경로
