@@ -27,6 +27,8 @@
         * @Autowired / org.springframework.beans.factory.annotation.Autowired, 스프링의 DI기능으로 해당 객체를 스프링이 자동으로 생성해줌. 객체를 주입하기 위해 사용하는 스프링의 애너테이션이다. 객체를 주입하는 방식에는 @Autowired 외에 Setter 또는 생성자를 사용하는 방식이 있다. 순환참조 문제와 같은 이유로 @Autowired 보다는 생성자를 통한 객체 주입방식이 권장된다. 하지만 테스트 코드의 경우에는 생성자를 통한 객체의 주입이 불가능하므로 테스트 코드 작성시에만 @Autowired를 사용
         * @Test / 해당 메서드가 테스트 메서드임을 의미. 클래스를 JUnit으로 실행 시 @Test 애너테이션이 붙은 메서드가 실행;JUnit은 작성한 테스트코드를 실행하기 위해 사용하는 자바의 테스트 프레임워크
         * @Transactional / org.springframework.transaction.annotation.Transactional, 메서드가 종료될 때까지 DB 세션이 유지된다.
+        * @RequiredArgsConstructor / @RequiredArgsConstructor는 롬복이 제공하는 애너테이션으로 final이 붙은 속성을 포함하는 생성자를 자동으로 생성하는 역할을 한다. 롬복의 @Getter, @Setter가 자동으로 Getter, Setter 메서드를 생성하는 것과 마찬가지로 @RequiredArgsConstructor는 자동으로 생성자를 생성한다. 따라서 스프링 의존성 주입 규칙에 의해 객체가 자동으로 주입된다.
+    
 
     - assertEquals(기대값, 실제값) / 테스트에서 기대값과 실제값을 비교하고 같으면 테스트 통과, 다르면 테스트 실패로 처리.
     - findAll, findById, findBySubject,
@@ -36,6 +38,10 @@
     - H2 database / 주로 개발용이나 소규모 프로젝트에서 사용되는 파일 기반의 경량 데이터베이스이다. 개발시에는 H2를 사용하여 빠르게 개발하고 실제 운영시스템은 좀 더 규모있는 DB를 사용하는 것이 일반적인 개발 패턴.
     - Entity / 데이터베이스 테이블과 매핑되는 자바 클래스, 모델, 도메인 모델이라고 부르기도 함.
     - Repository / 엔티티에 의해 생성된 데이터베이스 테이블에 접근하는 메서드들(예: findAll, save 등)을 사용하기 위한 인터페이스이다. 데이터 처리를 위해서는 테이블에 어떤 값을 넣거나 값을 조회하는 등의 CRUD(Create, Read, Update, Delete)가 필요하다. 이 때 이러한 CRUD를 어떻게 처리할지 정의하는 계층
+    - 스프링의 의존성 주입(Dependency Injection) 방식 3가지
+        * @Autowired 속성 - 속성에 @Autowired 애너테이션을 적용하여 객체를 주입하는 방식
+        * 생성자 - 생성자를 작성하여 객체를 주입하는 방식 (권장하는 방식)
+        * Setter - Setter 메서드를 작성하여 객체를 주입하는 방식 (메서드에 @Autowired 애너테이션 적용이 필요하다.)
     - application.properties 설정
         * spring.h2.console.enabled - H2 콘솔의 접속을 허용할지의 여부
         * spring.h2.console.path - 콘솔 접속을 위한 URL 경로
@@ -45,4 +51,4 @@
         * spring.datasource.password - 데이터베이스의 패스워드
         * spring.jpa.properties.hibernate.dialect - 데이터베이스 엔진 종류를 설정
         * spring.jpa.hibernate.ddl-auto - 엔티티를 기준으로 테이블을 생성하는 규칙을 정의, 개발 환경에서는 보통 update 모드를 사용하고 운영환경에서는 none 또는 validate 모드를 사용 / none - 엔티티가 변경되더라도 데이터베이스를 변경하지 않는다., update - 엔티티의 변경된 부분만 적용한다., validate - 변경사항이 있는지 검사만 한다., create - 스프링부트 서버가 시작될때 모두 drop하고 다시 생성한다., create-drop - create와 동일하다. 하지만 종료시에도 모두 drop 한다.
-    - 
+    - 스프링부트에서 template을 사용하기 위해서는 템플릿 엔진을 사용해야함 (Thymeleaf, Mustache, Groovy, Freemarker, Velocity 등)

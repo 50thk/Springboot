@@ -1,4 +1,4 @@
-package com.mysite.sbb;
+package com.mysite.sbb.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -10,6 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import com.mysite.sbb.answer.Answer;
+
 import javax.persistence.CascadeType;
 
 import lombok.Getter;
