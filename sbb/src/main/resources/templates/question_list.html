@@ -6,8 +6,8 @@
         </tr>
     </thead>
     <tbody>
-        <!-- th는 템플릿 엔진인 타임리프이고 each는 java for each와 같이 questionList의 개수만큼 반복, question 객체에 대입 -->
-        <!-- 타임리프의 속성 th:if, th:each loop객체, th:text 값(th:text 대신 [[]]으로 내용에 대체 가능) -->
+        <!--/* th는 템플릿 엔진인 타임리프이고 each는 java for each와 같이 questionList의 개수만큼 반복, question 객체에 대입
+        타임리프의 속성 th:if, th:each loop객체, th:text 값(th:text 대신 [[]]으로 내용에 대체 가능) */-->
         <tr th:each="question : ${questionList}">
             <td th:text="${question.subject}"></td>
             <td th:text="${question.createDate}"></td>
