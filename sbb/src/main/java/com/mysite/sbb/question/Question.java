@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 import com.mysite.sbb.answer.Answer;
 
-import javax.persistence.CascadeType;
+// import javax.persistence.CascadeType;
 
 import lombok.Getter;
 import lombok.Setter;
