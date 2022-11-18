@@ -8,8 +8,12 @@
     <tbody>
         <!--/* th는 템플릿 엔진인 타임리프이고 each는 java for each와 같이 questionList의 개수만큼 반복, question 객체에 대입
         타임리프의 속성 th:if, th:each loop객체, th:text 값(th:text 대신 [[]]으로 내용에 대체 가능) */-->
-        <tr th:each="question : ${questionList}">
-            <td th:text="${question.subject}"></td>
+        <tr th:each="question, index : ${questionList}">
+            <td>
+                <!--/* 타임리프에서 링크주소는 th:href 속성 사용, 해당 속성 사용으로 URL 주소를 나타낼 시 반드시 @{와 }사이에 입력
+                    /question/detail/ 문자열과 ${question.id}와 같은 자바 객체의 값을 더할 때에는 반드시 좌우에 |기호로 감싸주어야함. (타임리프의 문자열 연결방식)*/-->
+                <a th:href="@{|/question/detail/${question.id}|}" th:text="${question.subject}"></a>
+            </td>
             <td th:text="${question.createDate}"></td>
         </tr>
     </tbody>
