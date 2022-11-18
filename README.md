@@ -28,6 +28,11 @@
         * @Test / 해당 메서드가 테스트 메서드임을 의미. 클래스를 JUnit으로 실행 시 @Test 애너테이션이 붙은 메서드가 실행;JUnit은 작성한 테스트코드를 실행하기 위해 사용하는 자바의 테스트 프레임워크
         * @Transactional / org.springframework.transaction.annotation.Transactional, 메서드가 종료될 때까지 DB 세션이 유지된다.
         * @RequiredArgsConstructor / @RequiredArgsConstructor는 롬복이 제공하는 애너테이션으로 final이 붙은 속성을 포함하는 생성자를 자동으로 생성하는 역할을 한다. 롬복의 @Getter, @Setter가 자동으로 Getter, Setter 메서드를 생성하는 것과 마찬가지로 @RequiredArgsConstructor는 자동으로 생성자를 생성한다. 따라서 스프링 의존성 주입 규칙에 의해 객체가 자동으로 주입된다.
+        * @Service / 해당 클래스를 서비스로 지정
+        * @PathVariable / 가변하는 요청 URL의 주소의 변수 값을 얻을 때 @RequestMapping과 매개변수의 이름이 동일해야함.
+        * @PostMapping / @RequestMapping과 동일하게 매핑을 담당하는 역할을 하지만 POST요청만 받아들일 경우에 사용
+        * @RequestParam / 템플릿에서 입력한 내용을 얻음, 템플릿에서 얻고자하는 name 속성명과 변수명을 일치시켜야함.
+        
     
 
     - assertEquals(기대값, 실제값) / 테스트에서 기대값과 실제값을 비교하고 같으면 테스트 통과, 다르면 테스트 실패로 처리.
