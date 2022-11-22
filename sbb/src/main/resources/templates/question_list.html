@@ -1,5 +1,7 @@
-<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
-<div class="container my-3">
+<!-- 타임리프의 layout:decorate 속성으로 템플릿의 레이아웃(부모템플릿)으로 사용할 템플릿을 설정 -->
+<html layout:decorate="~{layout}">
+<!-- 타임리프의 layout:fragment 속성은 부모템플릿의 th:block 부분을 자식템플릿의 내용으로 바꾸기 위함 -->
+<div layout:fragment="content" class="container my-3">
     <table class="table">
         <thead class="table=dark">
             <tr>
@@ -25,3 +27,4 @@
         </tbody>
     </table>
 </div>
+</html>
